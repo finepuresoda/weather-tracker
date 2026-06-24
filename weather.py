@@ -1,0 +1,1 @@
+Add weather script placeholder.
