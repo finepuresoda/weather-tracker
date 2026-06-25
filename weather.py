@@ -2,11 +2,19 @@ import requests
 import pandas as pd
 from datetime import date
 import os
+os.environ['MPLBACKEND'] = 'Agg'
+import matplotlib
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
 
 # My camping location
 LATITUDE = 48.68998
 LONGITUDE = -113.687819
 LOCATION_NAME = "Glacier National Park"
+def generate_dashboard():
+    df = pd.read_csv("daily_log.csv", skipinitialspace=True)
+    df["datetime"] = pd.to_datetime(df["time"])
+    df = df.sort_values("datetime")
 
 # Camping month and day range
 CAMP_MONTH = 8
