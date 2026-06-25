@@ -106,7 +106,7 @@ print(f"Logged current temperature: {current_temp} degrees C at {current_time}")
 historical_df.to_csv("historical_weather.csv", index=False)
 forecast_df.to_csv("forecast_weather.csv", index=False)
 print("\nData saved to CSV files.")
-
+print("About to fetch current weather")
 current_data = get_current_weather(LATITUDE, LONGITUDE)
 current_temp = current_data["current"]["temperature_2m"]
 current_time = current_data["current"]["time"]
