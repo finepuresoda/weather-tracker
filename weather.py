@@ -74,6 +74,12 @@ for year_data in all_data:
 historical_df = pd.concat(dfs, ignore_index=True)
 
 # Get the 7-day forecast
+current_data = get_current_weather(LATITUDE, LONGITUDE)
+current_temp = current_data["current"]["temperature_2m"]
+current_time = current_data["current"]["time"]
+
+temp_c = current_temp
+temp_f = round(temp_c * 9/5 + 32, 1)
 forecast_data = get_forecast(LATITUDE, LONGITUDE)
 forecast_df = pd.DataFrame({
     "date": forecast_data["daily"]["time"],
@@ -97,6 +103,7 @@ log_df = pd.DataFrame({
     "date": [str(today)],
     "time": [current_time],
     "temperature_2m": [current_temp]
+    "temp_f": [temp_f]
 })
 log_file = "daily_log.csv"
 log_df.to_csv(log_file, mode='a', header=not os.path.isfile(log_file), index=False)
@@ -107,6 +114,3 @@ historical_df.to_csv("historical_weather.csv", index=False)
 forecast_df.to_csv("forecast_weather.csv", index=False)
 print("\nData saved to CSV files.")
 print("About to fetch current weather")
-current_data = get_current_weather(LATITUDE, LONGITUDE)
-current_temp = current_data["current"]["temperature_2m"]
-current_time = current_data["current"]["time"]
