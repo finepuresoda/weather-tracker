@@ -102,7 +102,7 @@ print(forecast_df)
 log_df = pd.DataFrame({
     "date": [str(today)],
     "time": [current_time],
-    "temperature_2m": [current_temp]
+    "temperature_2m": [current_temp],
     "temp_f": [temp_f]
 })
 log_file = "daily_log.csv"
