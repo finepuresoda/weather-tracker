@@ -150,4 +150,4 @@ forecast_df.to_csv("forecast_weather.csv", index=False)
 print("\nData saved to CSV files.")
 print("About to fetch current weather")
 
-generate_dashboard(df)
+generate_dashboard(log_df)
