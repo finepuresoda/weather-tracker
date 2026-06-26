@@ -138,6 +138,7 @@ forecast_df = pd.DataFrame({
     "max_temp": forecast_data["daily"]["temperature_2m_max"],
     "min_temp": forecast_data["daily"]["temperature_2m_min"]
 })
+print(f"temp_f is {temp_f}, HOT_THRESHOLD is {HOT_THRESHOLD}, COLD_THRESHOLD is {COLD_THRESHOLD}")
 if temp_f > HOT_THRESHOLD:
     send_discord_alert(f"Heat alert! {temp_f:.1f}F — above your {HOT_THRESHOLD}F threshold.")
 elif temp_f < COLD_THRESHOLD:
