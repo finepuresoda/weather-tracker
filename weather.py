@@ -12,11 +12,10 @@ import matplotlib.dates as mdates
 LATITUDE = 48.68998
 LONGITUDE = -113.687819
 LOCATION_NAME = "Glacier National Park"
-def generate_dashboard():
-    df = pd.read_csv("daily_log.csv", skipinitialspace=True)
+def generate_dashboard(df):
     df["datetime"] = pd.to_datetime(df["time"])
     df = df.sort_values("datetime")
-
+    
 # Camping month and day range
 CAMP_MONTH = 8
 CAMP_START_DAY = 1
