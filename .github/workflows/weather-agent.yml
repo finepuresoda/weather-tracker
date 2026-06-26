@@ -33,3 +33,7 @@ jobs:
           git commit -m "Update weather data $(date +'%Y-%m-%d')" || echo "No changes to commit"
           git pull --rebase origin main
           git push
+      - name: Run weather script
+        run: python weather.py
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
