@@ -12,7 +12,7 @@ import os
 
 HOT_THRESHOLD = 50
 COLD_THRESHOLD = 45
-DISCORD_WEBHOOK_URL = os.environ.get("https://discord.com/api/webhooks/1520205394381639710/YXPYNEdWbmhkfIaaJHCeiIqQEaPehw28fryecUXeAGhrvlevnlbFVb1UdQuZPcSTfDko", "")
+DISCORD_WEBHOOK_URL = os.environ.get("DISCORD_WEBHOOK_URL", "")
 
 # My camping location
 LATITUDE = 48.68998
