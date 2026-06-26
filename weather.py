@@ -22,7 +22,9 @@ def send_discord_alert(message):
     if not DISCORD_WEBHOOK_URL:
         print("No Discord webhook configured.")
         return
+    print("About to send Discord alert")
     response = requests.post(DISCORD_WEBHOOK_URL, json={"content": message}, timeout=10)
+    print("Discord request returned")
     if response.status_code == 204:
         print("Discord alert sent.")
     else:
