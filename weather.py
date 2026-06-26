@@ -15,6 +15,33 @@ LOCATION_NAME = "Glacier National Park"
 def generate_dashboard(df):
     df["datetime"] = pd.to_datetime(df["time"])
     df = df.sort_values("datetime")
+    max_idx = df["temp_f"].idxmax()
+    min_idx = df["temp_f"].idxmin()
+
+    fig = go.Figure()
+
+    fig.add_scatter(
+        x=df["datetime"], y=df["temp_f"],
+        mode="lines+markers", name="Temp (F)"
+    )
+    fig.add_scatter(
+        x=[df.loc[max_idx, "datetime"]], y=[df.loc[max_idx, "temp_f"]],
+        mode="markers+text",
+        marker=dict(color="red", size=14, symbol="star"),
+        text=[f"Max: {round(df.loc[max_idx, 'temp_f'], 1)}F"],
+        textposition="top right", name="Max"
+    )
+    fig.add_scatter(
+        x=[df.loc[min_idx, "datetime"]], y=[df.loc[min_idx, "temp_f"]],
+        mode="markers+text",
+        marker=dict(color="royalblue", size=14, symbol="star"),
+        text=[f"Min: {round(df.loc[min_idx, 'temp_f'], 1)}F"],
+        textposition="bottom right", name="Min"
+    )
+
+    fig.write_html("dashboard.html", include_plotlyjs="cdn")
+    print("Dashboard saved to dashboard.html")
+
     
 # Camping month and day range
 CAMP_MONTH = 8
@@ -122,33 +149,5 @@ historical_df.to_csv("historical_weather.csv", index=False)
 forecast_df.to_csv("forecast_weather.csv", index=False)
 print("\nData saved to CSV files.")
 print("About to fetch current weather")
-
-def generate_dashboard(df):
-    max_idx = df["temp_f"].idxmax()
-    min_idx = df["temp_f"].idxmin()
-
-    fig = go.Figure()
-
-    fig.add_scatter(
-        x=df["datetime"], y=df["temp_f"],
-        mode="lines+markers", name="Temp (F)"
-    )
-    fig.add_scatter(
-        x=[df.loc[max_idx, "datetime"]], y=[df.loc[max_idx, "temp_f"]],
-        mode="markers+text",
-        marker=dict(color="red", size=14, symbol="star"),
-        text=[f"Max: {round(df.loc[max_idx, 'temp_f'], 1)}F"],
-        textposition="top right", name="Max"
-    )
-    fig.add_scatter(
-        x=[df.loc[min_idx, "datetime"]], y=[df.loc[min_idx, "temp_f"]],
-        mode="markers+text",
-        marker=dict(color="royalblue", size=14, symbol="star"),
-        text=[f"Min: {round(df.loc[min_idx, 'temp_f'], 1)}F"],
-        textposition="bottom right", name="Min"
-    )
-
-    fig.write_html("dashboard.html", include_plotlyjs="cdn")
-    print("Dashboard saved to dashboard.html")
 
 generate_dashboard(df)
