@@ -22,9 +22,6 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Run weather script
-        run: python weather.py
-
       - name: Commit updated data    # --- just added
         run: |                       # --- just added
           git config user.name "Weather Agent"
